@@ -1,0 +1,32 @@
+# 言語を指定します
+language: go
+
+go:
+  - "1.13.x"
+  - master
+
+before_deploy:
+  # goxをインストール
+  - go get github.com/mitchellh/gox
+  # Linux, macOS, Windowsに対して、
+  # 386(32bit), amd64(64bit)CPU向けのバイナリをビルドします
+  - gox -os="linux darwin windows" -arch="386 amd64" -output="{{.Dir}}-{{.OS}}-{{.Arch}}/{{.Dir}}"
+  # バイナリを出力したディレクトリをそれぞれzipに固めます
+  - |
+    for os in linux darwin windows; do
+      for arch in 386 amd64; do
+        cp README.md LICENSE b64-$os-$arch
+        zip -r b64-$os-$arch.zip b64-$os-$arch
+      done
+    done
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file_glob: true
+  file: b64-*-*.zip
+  skip_cleanup: true
+  # tagが打たれたときのみGo 1.11でビルドしたバイナリをアップロードします
+  on:
+    tags: true
+    go: "1.13.x"
