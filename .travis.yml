@@ -22,11 +22,12 @@ before_deploy:
 
 deploy:
   provider: releases
-  api_key: $GITHUB_TOKEN
+  api_key:
+    secure: $GITHUB_TOKEN
   file_glob: true
   file: b64-*-*.zip
   skip_cleanup: true
   # tagが打たれたときのみGo 1.11でビルドしたバイナリをアップロードします
   on:
     tags: true
-    go: "1.13.x"
+    go: "1.13"
