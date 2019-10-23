@@ -32,6 +32,8 @@ notifications:
 deploy:
   - provider: script
     skip_cleanup: true
+    api_key:
+      secure: $GITHUB_TOKEN
     script: curl -sL https://git.io/goreleaser | bash
     on:
       tags: true
