@@ -7,9 +7,6 @@ go:
 notifications:
   email: false
 
-before_deploy:
-  - go get -u github.com/goreleaser/goreleaser
-
 deploy:
   - provider: script
     skip_cleanup: true
