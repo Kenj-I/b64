@@ -3,7 +3,6 @@ language: go
 
 go:
   - 1.12.x
-  - master
 
 notifications:
   email: false
@@ -12,12 +11,9 @@ before_deploy:
   - go get -u github.com/goreleaser/goreleaser
 
 deploy:
-  provider: script
-  script: goreleaser
-  api_key:
-    secure: $GITHUB_TOKEN
-  skip_cleanup: true
-  on:
-    tags: true
-    repo: Kenj-I/b64
-    condition: $TRAVIS_OS_NAME = linux
+  - provider: script
+    skip_cleanup: true
+    script: curl -sL https://git.io/goreleaser | bash
+    on:
+      tags: true
+      condition: $TRAVIS_OS_NAME = linux
