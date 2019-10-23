@@ -6,9 +6,8 @@ go:
 
 env:
   - GITHUB_TOKEN=$GITHUB_TOKEN
-services:
-  - docker
-
+script:
+  - echo GITHUB_TOKEN
 notifications:
   email: false
 
