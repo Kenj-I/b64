@@ -12,12 +12,12 @@ before_deploy:
   - go get -u github.com/goreleaser/goreleaser
 
 deploy:
-  provider: releases
+  provider: script
+  script: goreleaser
   api_key:
     secure: $GITHUB_TOKEN
-  file_glob: true
-  file: b64-*-*.zip
   skip_cleanup: true
   on:
     tags: true
     repo: Kenj-I/b64
+    condition: $TRAVIS_OS_NAME = linux
