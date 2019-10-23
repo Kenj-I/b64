@@ -15,8 +15,8 @@ limitations under the License.
 */
 package main
 
-import "github.com/Kenj-i/base64Converter/cmd"
+import "github.com/Kenj-i/b64/cmd"
 
 func main() {
-  cmd.Execute()
+	cmd.Execute()
 }

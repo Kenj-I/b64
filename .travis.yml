@@ -2,8 +2,11 @@
 language: go
 
 go:
-  - "1.13"
+  - 1.12.x
   - master
+
+notifications:
+  email: false
 
 before_deploy:
   # goxをインストール
